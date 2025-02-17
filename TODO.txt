@@ -1,0 +1,10 @@
+Naming conventions
+UI, [accessibility]
+Warnings
+Logs
+Async await usage
+Redo comments (Javadoc style for JS?)
+Typescript?
+unit tests
+Uniform title
+Check if AGIL link is same for everyone

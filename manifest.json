@@ -12,17 +12,19 @@
         "48": "res/icons/icon-48.png",
         "128": "res/icons/icon-128.png"
     },
-
+    "web_accessible_resources": [
+      {
+        "resources": ["res/SaveTemplateForm.html", "res/FetchTemplateForm.html"],
+        "matches": ["https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"]
+      }
+    ],
     "content_scripts": [
         {
-          "js": ["scripts/inject.js"],
-      
+          "js": ["scripts/save-data.js", "scripts/inject-ui.js"],
           "matches": [
-            //TODO: Check if link is same for everyone
             "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"
           ],
-          "all_frames": true,
-          "type": "module"
+          "all_frames": true
         }
     ]    
 }

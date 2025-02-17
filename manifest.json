@@ -1,0 +1,28 @@
+{
+    "name" : "AGIL Time Extension",
+    "description" : "Make SAP's AGIL Time usable",
+    "version" : "0.0.1",
+    "manifest_version" : 3,
+    "action": {
+        "default_popup":"popup/popup.html"
+    },
+    "icons": {
+        "16": "res/icons/icon-16.png",
+        "32": "res/icons/icon-32.png",
+        "48": "res/icons/icon-48.png",
+        "128": "res/icons/icon-128.png"
+    },
+
+    "content_scripts": [
+        {
+          "js": ["scripts/inject.js"],
+      
+          "matches": [
+            //TODO: Check if link is same for everyone
+            "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"
+          ],
+          "all_frames": true,
+          "type": "module"
+        }
+    ]    
+}

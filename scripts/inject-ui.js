@@ -7,7 +7,7 @@
 
 const FOOTER_CLASS = "sapMPageFooter";
 const TIME_RECORDING_DIV_ID = "application-Timerecording-display-component---ViewAddEntry--idOverviewView";
-const INPUT_DIV_ID = "__vbox2";
+const INPUTS_CONTAINER_DIV_ID = "__layout0";
 
 async function injectSaveTemplate(footer) {
     const templateDiv = await createTemplateDiv();
@@ -19,10 +19,10 @@ async function injectSaveTemplate(footer) {
     }
 }
 
-async function injectFetchTemplate(inputDiv) {
-    const fetchTemplatDiv = await createFetchTemplateDiv();
-    if(fetchTemplatDiv){
-        inputDiv.prepend(fetchTemplatDiv);
+async function injectFetchTemplate(inputContainerDiv) {
+    const fetchTemplateDiv = await createFetchTemplateDiv();
+    if(fetchTemplateDiv){
+        inputContainerDiv.insertBefore(fetchTemplateDiv, inputContainerDiv.childNodes[3]);
         console.debug("Fetch Template div injected");
     } else {
         console.error("Failed to create fetch template div.");
@@ -102,8 +102,8 @@ waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer)
 
 
 //Waits for the footer toolbar to load:
-waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUT_DIV_ID}`).then(async (inputDiv) => {
+waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`).then(async (inputContainerDiv) => {
     console.debug("Time Recording's Input Div found.");
-    await injectFetchTemplate(inputDiv);
+    await injectFetchTemplate(inputContainerDiv);
 });
 

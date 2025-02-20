@@ -5,10 +5,6 @@
     Author: meer.shah@actico.com
 */
 
-const DURATION_INPUT_ID = "__input0-inner";
-const TICKET_NUMBER_INPUT_ID = "__input1-inner"
-const DESCRIPTION_INPUT_ID = "__area0-inner"
-
 function saveData(key){
     try {
         console.debug("Key: " + key);
@@ -19,7 +15,7 @@ function saveData(key){
             description: getDescription()
         }
 
-        localStorage.setItem(key, JSON.stringify(projectData));
+        localStorage.setItem(LOCAL_STORAGE_PREFIX + key, JSON.stringify(projectData));
 
         console.debug("Data from localStorage: " + JSON.stringify(projectData));
         return true;
@@ -28,6 +24,20 @@ function saveData(key){
         console.error("Error occurred while saving data: " + JSON.stringify(error));
         return false;
     }
+}
+
+async function getAllTemplateNames() {
+    const keys = [];
+    for(let i=0; i<localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if(key.startsWith(LOCAL_STORAGE_PREFIX))
+            keys.push(key.substring(LOCAL_STORAGE_PREFIX.length));
+    }
+    return keys;
+}
+
+function getData(key){
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_PREFIX+key));
 }
 
 // Get the value for duration:

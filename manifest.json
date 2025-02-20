@@ -20,7 +20,7 @@
     ],
     "content_scripts": [
         {
-          "js": ["scripts/save-data.js", "scripts/inject-ui.js"],
+          "js": ["scripts/constants.js","scripts/data-handler.js", "scripts/inject-ui.js"],
           "matches": [
             "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"
           ],

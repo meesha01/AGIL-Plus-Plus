@@ -5,12 +5,24 @@
     Author: meer.shah@actico.com
 */
 
-const FOOTER_CLASS = "sapMPageFooter";
-const TIME_RECORDING_DIV_ID = "application-Timerecording-display-component---ViewAddEntry--idOverviewView";
-const INPUTS_CONTAINER_DIV_ID = "__layout0";
+
+console.debug("Content script inject-ui.js is running");
+
+//Waits for the footer toolbar to load:
+waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer) => {
+    console.debug("Time Recording's Footer found.");
+    await injectSaveTemplate(footer);
+});
+
+//Waits for the input field section to load:
+waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`)
+    .then(async (inputContainerDiv) => {
+    console.debug("Time Recording's Input Div found.");
+    await injectFetchTemplate(inputContainerDiv);
+});
 
 async function injectSaveTemplate(footer) {
-    const templateDiv = await createTemplateDiv();
+    const templateDiv = await createSaveTemplateDiv();
     if (templateDiv) {
       footer.prepend(templateDiv);
       console.debug("Save Template div injected");
@@ -38,8 +50,19 @@ async function createFetchTemplateDiv(){
         templateDivHolder.innerHTML = fetchTemplateFormHTML;
         const templateSelector = templateDivHolder.querySelector("#templateSelectInput");
         templateSelector.addEventListener("change", () => {
-            console.log(templateSelector.value);
+            if(templateSelector.value === "select")
+                setFields(null);
+            else{
+                const templateData = getData(templateSelector.value);
+                setFields(templateData);
+            }
         })
+
+        //Add options to Template Selector:
+        const templateNames = await getAllTemplateNames();
+        for(const templateName of templateNames){
+            templateSelector.appendChild(createTemplateOption(templateName));
+        }
 
         return templateDivHolder;
     } catch (error) {
@@ -48,8 +71,46 @@ async function createFetchTemplateDiv(){
     }
 }
 
+function createTemplateOption(value) {
+    // <option className="sapUiBodyBackground" value="value">Value</option>
+    const option = document.createElement("option");
+    option.classList.add("sapUiBodyBackground");
+    option.value = value;
+    option.innerHTML = value;
+    return option;
+}
+
+function setFields(templateData) {
+    if(templateData==null){
+        //Clear all fields
+        templateData={
+            duration: null,
+            ticketNumber: null,
+            description: null
+        }
+    }
+
+    setField(DURATION_INPUT_ID, templateData.duration);
+    setField(TICKET_NUMBER_INPUT_ID, templateData.ticketNumber);
+    setField(DESCRIPTION_INPUT_ID, templateData.description);
+}
+
+function setField(id, value){
+
+    const inputElement = document.getElementById(id);
+    if(inputElement){
+        inputElement.focus(); // Necessary for SAP to recognize the change
+        inputElement.value = value;
+        inputElement.blur(); // Necessary for SAP to recognize the change
+        console.debug("Field "+id+" set to "+value);
+        return;
+    }
+
+    console.debug("Field "+id+" not found");
+}
+
 //Creates form to store template
-async function createTemplateDiv() {
+async function createSaveTemplateDiv() {
     try {
         const response = await fetch(chrome.runtime.getURL("res/SaveTemplateForm.html"));
         const templateFormHTML = await response.text();
@@ -71,8 +132,6 @@ async function createTemplateDiv() {
     }
 }
 
-console.debug("Content script is running");
-
 // Taken from https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
 function waitForElement(selector) {
     return new Promise(resolve => {
@@ -93,17 +152,3 @@ function waitForElement(selector) {
         });
     });
 }
-
-//Waits for the input field section to load:
-waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer) => {
-    console.debug("Time Recording's Footer found.");
-    await injectSaveTemplate(footer);
-});
-
-
-//Waits for the footer toolbar to load:
-waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`).then(async (inputContainerDiv) => {
-    console.debug("Time Recording's Input Div found.");
-    await injectFetchTemplate(inputContainerDiv);
-});
-

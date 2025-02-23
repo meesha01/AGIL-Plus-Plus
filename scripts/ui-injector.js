@@ -38,6 +38,29 @@ async function injectFetchTemplate(inputContainerDiv) {
     }
 }
 
+//Creates form to store template
+async function createSaveTemplateDiv() {
+    try {
+        const response = await fetch(chrome.runtime.getURL("res/SaveTemplateForm.html"));
+        const templateFormHTML = await response.text();
+
+        const templateHolder = document.createElement("div");
+        templateHolder.innerHTML = templateFormHTML;
+
+        // Attach event listener to the button
+        const saveTemplateButton = templateHolder.querySelector("button"); // Select the button within the loaded HTML
+        saveTemplateButton.addEventListener("click", function () {
+            console.debug("Save Template button clicked");
+            saveTemplate(templateHolder.querySelector("#templateNameInput").value);
+        });
+
+        return templateHolder;
+    } catch (error) {
+        console.error("Error loading save template form:", error);
+        return null;
+    }
+}
+
 async function createFetchTemplateDiv(){
     try{
         const response = await fetch(chrome.runtime.getURL("res/FetchTemplateForm.html"));
@@ -70,27 +93,4 @@ function createTemplateOption(value) {
     option.value = value;
     option.innerHTML = value;
     return option;
-}
-
-//Creates form to store template
-async function createSaveTemplateDiv() {
-    try {
-        const response = await fetch(chrome.runtime.getURL("res/SaveTemplateForm.html"));
-        const templateFormHTML = await response.text();
-
-        const templateHolder = document.createElement("div");
-        templateHolder.innerHTML = templateFormHTML;
-
-        // Attach event listener to the button
-        const saveTemplateButton = templateHolder.querySelector("button"); // Select the button within the loaded HTML
-        saveTemplateButton.addEventListener("click", function () {
-            console.debug("Save Template button clicked");
-            saveTemplate(templateHolder.querySelector("#templateNameInput").value);
-        });
-
-        return templateHolder;
-    } catch (error) {
-        console.error("Error loading save template form:", error);
-        return null;
-    }
 }

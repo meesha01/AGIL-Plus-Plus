@@ -3,6 +3,9 @@
     See https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
 */
 
+//Prefix to distinguish from other local storage data:
+const LOCAL_STORAGE_PREFIX = "agil_extension_data__";
+
 function saveData(key, value){
     console.debug("Key: " + key);
     localStorage.setItem(LOCAL_STORAGE_PREFIX + key, JSON.stringify(value));

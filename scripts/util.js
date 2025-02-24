@@ -26,7 +26,7 @@ async function waitForElement(selector) {
 // For some reason a simple click() does not work for SAP buttons
 function simulateClick(element){
     if(!element) {
-        log.warn("Element is null");
+        console.warn("Element is null");
         return;
     }
 

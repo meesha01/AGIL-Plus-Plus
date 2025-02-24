@@ -16,6 +16,18 @@ const PROJECT_INPUT_ID = "application-Timerecording-display-component---ViewAddE
 // Other specific IDs:
 const PROJECT_SEARCH_INPUT_ID =
     "application-Timerecording-display-component---ViewAddEntryProject--selectDialog-searchField-I";
-const PROJECT_SEARCH_CANCEL_BUTTON =
+const PROJECT_SEARCH_CANCEL_BUTTON_ID =
     "application-Timerecording-display-component---ViewAddEntryProject--selectDialog-cancel-BDI-content";
+const PROJECT_SEARCH_RESULT_LIST_ID =
+    "application-Timerecording-display-component---ViewAddEntryProject--selectDialog-list-listUl";
+const PROJECT_SEARCH_NO_DATA_LI_ID =
+    "application-Timerecording-display-component---ViewAddEntryProject--selectDialog-list-nodata";
 
+const KEY_DOWN_ENTER = new KeyboardEvent("keydown", {
+    key: "Enter",
+    code: "Enter",
+    which: 13,
+    keyCode: 13,
+    bubbles: true,
+    cancelable: true,
+});

@@ -1,5 +1,5 @@
 /*
-    Gets and sets data for specific project fields:
+    Content Script that gets and sets data for specific project fields:
  */
 
 async function saveTemplate(templateName){
@@ -9,13 +9,15 @@ async function saveTemplate(templateName){
         getInputValue(DURATION_INPUT_ID),
         getInputValue(TICKET_NUMBER_INPUT_ID),
         getInputValue(DESCRIPTION_INPUT_ID),
-        await getProjectId() //Requires special logic
+        await getProjectId() //Project requires special logic
     );
 
     saveData(templateName, projectData);
+
+    //TODO: Refresh template selector list
 }
 
-function setFields(templateName) {
+async function setFields(templateName) {
     let templateData = getValue(templateName);
 
     if(templateData==null){
@@ -26,7 +28,7 @@ function setFields(templateName) {
     setField(DURATION_INPUT_ID, templateData.duration);
     setField(TICKET_NUMBER_INPUT_ID, templateData.ticketNumber);
     setField(DESCRIPTION_INPUT_ID, templateData.description);
-    setField(PROJECT_INPUT_ID, templateData.projectId);
+    await setProject(templateData.projectId);
 }
 
 // Get value for project:
@@ -43,8 +45,26 @@ async function getProjectId(){
     const projectId = projectSearchInput.value;
 
     // Click the cancel button go back to previous state
-    const cancelButton = document.getElementById(PROJECT_SEARCH_CANCEL_BUTTON);
+    const cancelButton = document.getElementById(PROJECT_SEARCH_CANCEL_BUTTON_ID);
     simulateClick(cancelButton);
 
     return projectId;
+}
+
+// Set the project
+async function setProject(projectId){
+    //Click the Project input field
+    const projectInputField = document.getElementById(PROJECT_INPUT_ID);
+    simulateClick(projectInputField);
+
+    //Search for the Project using its ID:
+    const projectSearchInput = await waitForElement(`#${PROJECT_SEARCH_INPUT_ID}`);
+    projectSearchInput.value = projectId;
+    projectSearchInput.dispatchEvent(KEY_DOWN_ENTER);
+
+    //Wait for the results to come back
+    const searchResultListItem = await waitForElement(
+        `#${PROJECT_SEARCH_RESULT_LIST_ID} > li:not(#${PROJECT_SEARCH_NO_DATA_LI_ID})`
+    );
+    simulateClick(searchResultListItem);
 }

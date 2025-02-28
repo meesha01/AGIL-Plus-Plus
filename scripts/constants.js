@@ -5,7 +5,8 @@
 // Container IDs
 const FOOTER_CLASS = "sapMPageFooter";
 const TIME_RECORDING_DIV_ID = "application-Timerecording-display-component---ViewAddEntry--idOverviewView";
-const INPUTS_CONTAINER_DIV_ID = "__layout0";
+const TIME_RECORDING_MAIN_SECTION_ID =
+    "application-Timerecording-display-component---ViewAddEntry--idOverviewView-cont";
 
 // Input field IDs
 const DURATION_INPUT_ID = "__input0-inner";

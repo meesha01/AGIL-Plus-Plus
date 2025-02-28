@@ -12,8 +12,9 @@ waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer)
 })
 .catch(error => console.error('Error while finding the Time Recording footer: ', error.message));
 
-//Inject elements to fetch template after the input fields load
-waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`)
+// Inject elements to fetch template after the input fields load
+// Wait for the second child of the main section (where all the form fields are)
+waitForElement(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2)`)
     .then(async (inputContainerDiv) => {
     console.debug("Time Recording's Input Div found.");
     await injectFetchTemplate(inputContainerDiv);

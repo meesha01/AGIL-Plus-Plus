@@ -70,17 +70,14 @@ async function setProject(projectId){
         const projectSearchInput = await waitForElement(`#${PROJECT_SEARCH_INPUT_ID}`)
 
         projectSearchInput.value = projectId;
-        //Signal value change:
-        simulateClick(projectInputField);
-        projectInputField.disabled = new Event("input", {bubbles: true});
-        projectInputField.disabled = new Event("change", {bubbles: true});
+        //Signal value change and search:
+        projectSearchInput.dispatchEvent(new Event('input', {bubbles: true}));
         projectSearchInput.dispatchEvent(KEY_DOWN_ENTER);
 
-        //Wait for the results to come back
+        //Wait for the results to come back and click
         const searchResultListItem = await waitForElement(
             `#${PROJECT_SEARCH_RESULT_LIST_ID} > li:not(#${PROJECT_SEARCH_NO_DATA_LI_ID})`
         );
-
         simulateClick(searchResultListItem);
     } catch(error) {
         console.error("Could not Set the Project ID.", error.message);

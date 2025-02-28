@@ -101,3 +101,17 @@ function getInputValue(elementId){
     return null;
 }
 
+/**
+ * Adds an <option> to the given element
+ * Target option -> <option className="sapUiBodyBackground" value="value">Value</option>
+ *
+ * @param element
+ * @param optionValue
+ */
+function addOption(element, optionValue) {
+    const option = document.createElement("option");
+    option.classList.add("sapUiBodyBackground");
+    option.value = optionValue;
+    option.innerHTML = optionValue;
+    element.appendChild(option);
+}

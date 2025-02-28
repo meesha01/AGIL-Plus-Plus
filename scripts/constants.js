@@ -13,6 +13,8 @@ const TICKET_NUMBER_INPUT_ID = "__input1-inner";
 const DESCRIPTION_INPUT_ID = "__area0-inner";
 const PROJECT_INPUT_ID = "application-Timerecording-display-component---ViewAddEntry--productInput-inner";
 
+const TEMPLATE_SELECTOR_ID = "templateSelectInput";
+
 // Other specific IDs:
 const PROJECT_SEARCH_INPUT_ID =
     "application-Timerecording-display-component---ViewAddEntryProject--selectDialog-searchField-I";

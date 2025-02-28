@@ -89,7 +89,7 @@ async function createFetchTemplateDiv(){
 
         const templateDivHolder = document.createElement("div");
         templateDivHolder.innerHTML = fetchTemplateFormHTML;
-        const templateSelector = templateDivHolder.querySelector("#templateSelectInput");
+        const templateSelector = templateDivHolder.querySelector("#"+TEMPLATE_SELECTOR_ID);
         templateSelector.addEventListener("change", () => {
             setFields(templateSelector.value);
         });
@@ -97,7 +97,7 @@ async function createFetchTemplateDiv(){
         //Add options to Template Selector:
         const templateNames = await getAllKeys();
         for(const templateName of templateNames){
-            templateSelector.appendChild(createTemplateOption(templateName));
+            addOption(templateSelector, templateName);
         }
 
         return templateDivHolder;
@@ -105,16 +105,4 @@ async function createFetchTemplateDiv(){
         console.error("Error loading fetch template form:", error.message);
         return null;
     }
-}
-
-/**
- * Creates the <option> element representing a stored Template
- * <option className="sapUiBodyBackground" value="value">Value</option>
- */
-function createTemplateOption(value) {
-    const option = document.createElement("option");
-    option.classList.add("sapUiBodyBackground");
-    option.value = value;
-    option.innerHTML = value;
-    return option;
 }

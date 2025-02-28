@@ -18,8 +18,13 @@ async function saveTemplate(templateName){
     );
 
     saveData(templateName, projectData);
-
-    //TODO: Refresh template selector list
+    const templateSelector = document.getElementById(TEMPLATE_SELECTOR_ID);
+    if(templateSelector) {
+        addOption(templateSelector, templateName);
+    }
+    else{
+        console.error("Template selector not found while trying to add new option-"+ templateName);
+    }
     //TODO: Display some kind of message saying "Saved"
 }
 

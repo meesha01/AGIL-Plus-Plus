@@ -1,7 +1,7 @@
-/*
-    Content script that Injects UI elements to the AGIL Time Recording page
-    See https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
-*/
+/**
+ * Content script that Injects UI elements to the AGIL Time Recording page
+ * See https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
+ */
 
 console.debug("Content script inject-ui.js is running");
 
@@ -20,6 +20,11 @@ waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`)
 })
 .catch(error => console.error('Error while finding the Time Recording container: ', error.message));
 
+/**
+ * Injects the necessary UI to save the project data to a template, in the footer
+ * @param footer
+ * @returns {Promise<void>}
+ */
 async function injectSaveTemplate(footer) {
     const templateDiv = await createSaveTemplateDiv();
     if (templateDiv) {
@@ -30,6 +35,11 @@ async function injectSaveTemplate(footer) {
     }
 }
 
+/**
+ * Injects the necessary UI to select the saved template to be populated
+ * @param inputContainerDiv
+ * @returns {Promise<void>}
+ */
 async function injectFetchTemplate(inputContainerDiv) {
     const fetchTemplateDiv = await createFetchTemplateDiv();
     if(fetchTemplateDiv){
@@ -40,7 +50,11 @@ async function injectFetchTemplate(inputContainerDiv) {
     }
 }
 
-//Creates form to store template
+/**
+ * Creates the UI elements to store save the project data to a template
+ * @returns {Promise<HTMLDivElement|null>} A promise that resolves to the Div containing the UI
+ * Or null if there was an error
+ */
 async function createSaveTemplateDiv() {
     try {
         const response = await fetch(chrome.runtime.getURL("res/SaveTemplateForm.html"));
@@ -63,6 +77,11 @@ async function createSaveTemplateDiv() {
     }
 }
 
+/**
+ * Creates the UI elements required to select the saved template to be populated
+ * @returns {Promise<HTMLDivElement|null>} A promise that resolves to the Div containing the UI
+ * Or null if there was error
+ */
 async function createFetchTemplateDiv(){
     try{
         const response = await fetch(chrome.runtime.getURL("res/FetchTemplateForm.html"));
@@ -88,6 +107,9 @@ async function createFetchTemplateDiv(){
     }
 }
 
+/**
+ * Creates the <option> element representing a stored Template
+ */
 function createTemplateOption(value) {
     // <option className="sapUiBodyBackground" value="value">Value</option>
     const option = document.createElement("option");

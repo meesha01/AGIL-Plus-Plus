@@ -1,7 +1,7 @@
-/*
-    Class that encapsulates Project entry data
+/**
+ * Class representing the data for a Project Entry in AGIL time
+ * @class
  */
-
 class ProjectEntry{
     duration; ticketNumber; description; projectId;
 

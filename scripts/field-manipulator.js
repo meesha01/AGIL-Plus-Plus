@@ -1,7 +1,12 @@
-/*
-    Content Script that gets and sets data for specific project fields:
+/**
+ * Content Script that gets and sets data for specific Project related fields
  */
 
+/**
+ * Saves Project data to a template
+ * @param templateName
+ * @returns {Promise<void>}
+ */
 async function saveTemplate(templateName){
     console.debug("Template name: " + templateName);
 
@@ -18,6 +23,11 @@ async function saveTemplate(templateName){
     //TODO: Display some kind of message saying "Saved"
 }
 
+/**
+ * Sets the value for all the project fields
+ * @param templateName
+ * @returns {Promise<void>}
+ */
 async function setFields(templateName) {
     let templateData = getValue(templateName);
 
@@ -32,7 +42,11 @@ async function setFields(templateName) {
     await setProject(templateData.projectId);
 }
 
-// Get value for project:
+/**
+ * Fetches the ID of the selected project
+ * @returns {Promise<string|null>} A promise that resolves to the project ID string,
+ * or null if retrieval fails
+ */
 async function getProjectId(){
     //Click the Project input field
     const projectInputField = document.getElementById(PROJECT_INPUT_ID);
@@ -59,7 +73,11 @@ async function getProjectId(){
     }
 }
 
-// Set the project
+/**
+ * Selects a project based on the project ID
+ * @param projectId
+ * @returns {Promise<void>}
+ */
 async function setProject(projectId){
     //Click the Project input field
     const projectInputField = document.getElementById(PROJECT_INPUT_ID);

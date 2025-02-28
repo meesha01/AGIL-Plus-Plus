@@ -1,5 +1,5 @@
-/*
-    All shared constants for the project
+/**
+ * Contains all the constants required throughout the Project
  */
 
 // Container IDs

@@ -30,7 +30,6 @@ async function waitForElement(selector, timeout=10000) {
         const elementTimeout = setTimeout(() => {
             observer.disconnect();
             const errorMessage = `Timed out after ${timeout} ms, while waiting for ${selector}`
-            console.warn(errorMessage);
             reject(new Error(errorMessage));
         }, timeout);
 

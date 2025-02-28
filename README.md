@@ -1,4 +1,4 @@
-# AGIL++
+# AGILTime++
 A Chrome extension that adds features to SAP's AGILTime Tool
 
 ## Feature List:

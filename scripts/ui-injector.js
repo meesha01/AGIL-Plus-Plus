@@ -10,7 +10,7 @@ waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer)
     console.debug("Time Recording's Footer found.");
     await injectSaveTemplate(footer);
 })
-.catch(error => console.error('Error while finding the Time Recording footer: ', error.message));
+.catch(error => console.info('Error while finding the Time Recording footer: ', error.message));
 
 // Inject elements to fetch template after the input fields load
 // Wait for the second child of the main section (where all the form fields are)
@@ -19,7 +19,7 @@ waitForElement(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2)`)
     console.debug("Time Recording's Input Div found.");
     await injectFetchTemplate(inputContainerDiv);
 })
-.catch(error => console.error('Error while finding the Time Recording container: ', error.message));
+.catch(error => console.info('Error while finding the Time Recording container: ', error.message));
 
 /**
  * Injects the necessary UI to save the project data to a template, in the footer

@@ -109,9 +109,9 @@ async function createFetchTemplateDiv(){
 
 /**
  * Creates the <option> element representing a stored Template
+ * <option className="sapUiBodyBackground" value="value">Value</option>
  */
 function createTemplateOption(value) {
-    // <option className="sapUiBodyBackground" value="value">Value</option>
     const option = document.createElement("option");
     option.classList.add("sapUiBodyBackground");
     option.value = value;

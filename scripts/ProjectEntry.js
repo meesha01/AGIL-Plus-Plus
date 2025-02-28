@@ -1,5 +1,5 @@
 /**
- * Class representing the data for a Project Entry in AGIL time
+ * Class representing the data for a Project Entry in AGILTime
  * @class
  */
 class ProjectEntry{

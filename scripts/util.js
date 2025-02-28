@@ -2,7 +2,6 @@
  * Utility functions used throughout the project
  */
 
-
 /**
  * Given a css selector, it waits for the matching element to appear in the DOM
  *
@@ -51,7 +50,7 @@ async function waitForElement(selector, timeout=10000) {
 }
 
 /**
- * For some reason a simple click() does not work for buttons in AGIL Time Tracking
+ * For some reason a simple click() does not work for buttons in AGILTime
  * It must have a mousedown event + click()
  * This functions simulates a click on a DOM element as if a user clicked it
  * @param element

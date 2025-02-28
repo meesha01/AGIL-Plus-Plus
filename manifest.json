@@ -1,6 +1,6 @@
 {
-    "name" : "AGIL Time Extension",
-    "description" : "Make SAP's AGIL Time usable",
+    "name" : "AGILTime++",
+    "description" : "Adds features to SAP's AGILTime Tool",
     "version" : "0.0.1",
     "manifest_version" : 3,
     "action": {

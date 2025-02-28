@@ -4,7 +4,7 @@
  */
 
 //Prefix to distinguish from other local storage data:
-const LOCAL_STORAGE_PREFIX = "agil_extension_data__";
+const LOCAL_STORAGE_PREFIX = "agilplusplus_data__";
 
 function saveData(key, value){
     console.debug("Key: " + key);

@@ -5,3 +5,4 @@ Uniform title
 Check if AGIL link is same for everyone
 Fix/add asynchronous code
 Refresh template selector when new values are added/updated
+waitForElement Timeout errors

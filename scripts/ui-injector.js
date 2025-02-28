@@ -9,14 +9,16 @@ console.debug("Content script inject-ui.js is running");
 waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer) => {
     console.debug("Time Recording's Footer found.");
     await injectSaveTemplate(footer);
-});
+})
+.catch(error => console.error('Error while finding the Time Recording footer: ', error.message));
 
 //Inject elements to fetch template after the input fields load
 waitForElement(`#${TIME_RECORDING_DIV_ID} #${INPUTS_CONTAINER_DIV_ID}`)
     .then(async (inputContainerDiv) => {
     console.debug("Time Recording's Input Div found.");
     await injectFetchTemplate(inputContainerDiv);
-});
+})
+.catch(error => console.error('Error while finding the Time Recording container: ', error.message));
 
 async function injectSaveTemplate(footer) {
     const templateDiv = await createSaveTemplateDiv();
@@ -56,7 +58,7 @@ async function createSaveTemplateDiv() {
 
         return templateHolder;
     } catch (error) {
-        console.error("Error loading save template form:", error);
+        console.error("Error loading save template form:", error.message);
         return null;
     }
 }
@@ -81,7 +83,7 @@ async function createFetchTemplateDiv(){
 
         return templateDivHolder;
     } catch (error) {
-        console.error("Error loading fetch template form:", error);
+        console.error("Error loading fetch template form:", error.message);
         return null;
     }
 }

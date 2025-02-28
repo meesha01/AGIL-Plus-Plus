@@ -3,19 +3,30 @@
  */
 
 // Taken from https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
-async function waitForElement(selector) {
-    return new Promise(resolve => {
+async function waitForElement(selector, timeout=10000) {
+    return new Promise((resolve, reject) => {
+
+        //Check if an element already exists:
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
         }
 
+        // Set up a timer. Default is 10 seconds:
+        const elementTimeout = setTimeout(() => {
+            observer.disconnect();
+            const errorMessage = `Timed out after ${timeout} ms, while waiting for ${selector}`
+            console.warn(errorMessage);
+            reject(new Error(errorMessage));
+        }, timeout);
+
+        // Observe for the element:
         const observer = new MutationObserver(() => {
             if (document.querySelector(selector)) {
                 observer.disconnect();
+                clearTimeout(elementTimeout);
                 resolve(document.querySelector(selector));
             }
         });
-
         observer.observe(document.body, {
             childList: true,
             subtree: true
@@ -58,3 +69,4 @@ function getInputValue(elementId){
     console.warn(`Input element ${elementId} not found`);
     return null;
 }
+

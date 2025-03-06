@@ -18,7 +18,7 @@
  *
  * @see {@link https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists|Original source}
  */
-async function waitForElement(selector, timeout=10000) {
+async function waitForElement(selector, timeout=-1) {
     return new Promise((resolve, reject) => {
 
         //Check if an element already exists:
@@ -26,12 +26,15 @@ async function waitForElement(selector, timeout=10000) {
             return resolve(document.querySelector(selector));
         }
 
-        // Set up a timer. Default is 10 seconds:
-        const elementTimeout = setTimeout(() => {
-            observer.disconnect();
-            const errorMessage = `Timed out after ${timeout} ms, while waiting for ${selector}`
-            reject(new Error(errorMessage));
-        }, timeout);
+        let elementTimeout;
+        // Set up a timer
+        if(timeout>0) {
+             elementTimeout = setTimeout(() => {
+                observer.disconnect();
+                const errorMessage = `Timed out after ${timeout} ms, while waiting for ${selector}`
+                reject(new Error(errorMessage));
+            }, timeout)
+        }
 
         // Observe for the element:
         const observer = new MutationObserver(() => {

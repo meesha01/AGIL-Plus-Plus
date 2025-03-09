@@ -1,0 +1,81 @@
+<!-- Div for shortcut buttons to select duration -->
+
+<!--
+sample from https://ui5.sap.com//#/entity/sap.m.Button/sample/sap.m.sample.Button/code
+
+<Button text="Default"
+    press="onPress"
+    ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+    <layoutData>
+        <FlexItemData growFactor="1" />
+    </layoutData>
+</Button>
+-->
+
+
+<div id="durationShortcutDev" class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+    style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;">
+    <div class="sapMInputBase sapMInputBaseHeightMargin sapMInput sapMInputBaseHasEndIcons sapUiSmallMarginBottom"
+        style="width: 100%;">
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">0.25</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">0.5</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">0.75</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault" style="background-color: #e3e3e3"><span
+                    class="sapMBtnContent">1</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">1.25</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">1.5</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">1.75</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault" style="background-color: #e3e3e3"><span
+                    class="sapMBtnContent">2</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">2.25</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">2.5</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">2.75</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault" style="background-color: #e3e3e3"><span
+                    class="sapMBtnContent">3</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">3.25</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">3.5</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">3.75</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault" style="background-color: #e3e3e3"><span
+                    class="sapMBtnContent">4</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">4.25</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">4.5</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault"><span
+                    class="sapMBtnContent">4.75</span></span></button>
+        <button data-sap-ui-render="" data-ui5-accesskey="d" class="sapMBtnBase sapMBtn"><span
+                class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnDefault" style="background-color: #e3e3e3"><span
+                    class="sapMBtnContent">5</span></span></button>
+    </div>
+</div>

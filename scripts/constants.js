@@ -7,6 +7,9 @@ const FOOTER_CLASS = "sapMPageFooter";
 const TIME_RECORDING_DIV_ID = "application-Timerecording-display-component---ViewAddEntry--idOverviewView";
 const TIME_RECORDING_MAIN_SECTION_ID =
     "application-Timerecording-display-component---ViewAddEntry--idOverviewView-cont";
+const TIME_RECORDING_DURATION_DATA_ID =
+    "__data23";
+
 
 // Input field IDs
 const DURATION_INPUT_ID = "__input0-inner";

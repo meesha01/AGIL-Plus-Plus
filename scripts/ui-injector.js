@@ -21,6 +21,15 @@ waitForElement(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2)`)
 })
 .catch(error => console.info('Error while finding the Time Recording container: ', error.message));
 
+// Inject duration shortcuts before before the original duration data-element
+waitForElement(`#${TIME_RECORDING_DURATION_DATA_ID}`)
+    .then(async (durationDataRow) => {
+    console.debug("Duration Data Div found.");
+    await injectDurationShortcutsTemplate(durationDataRow);
+})
+.catch(error => console.info('Error while finding the Duration Input container: ', error.message));
+
+
 /**
  * Injects the necessary UI to save the project data to a template, in the footer
  * @param footer
@@ -48,6 +57,21 @@ async function injectFetchTemplate(inputContainerDiv) {
         console.debug("Fetch Template div injected");
     } else {
         console.error("Failed to create fetch template div.");
+    }
+}
+
+/**
+ * Injects some buttons to ease the duration input
+ * @param inputContainerDiv
+ * @returns {Promise<void>}
+ */
+async function injectDurationShortcutsTemplate(durationInputRow) {
+    const durationShortcutDiv = await createDurationShortcutsDiv();
+    if(durationShortcutDiv){
+        durationInputRow.insertBefore(durationShortcutDiv, durationInputRow.childNodes[0]);
+        console.debug("DurationShortcuts Template div injected");
+    } else {
+        console.error("Failed to create DurationShortcuts div.");
     }
 }
 
@@ -104,6 +128,30 @@ async function createFetchTemplateDiv(){
         return templateDivHolder;
     } catch (error) {
         console.error("Error loading fetch template form:", error.message);
+        return null;
+    }
+}
+
+async function createDurationShortcutsDiv(){
+    try{
+        const response = await fetch(chrome.runtime.getURL("res/DurationShortcuts.html"));
+        const durationShortcutsHTML = await response.text();
+
+        const shortCutDivHolder = document.createElement("div");
+        shortCutDivHolder.innerHTML = durationShortcutsHTML;
+
+        const buttons = shortCutDivHolder.querySelectorAll(".sapMBtn");
+        buttons.forEach( button => { 
+            button.addEventListener("click", () => {
+                console.debug("Received click event on " + button.textContent)
+                setField(DURATION_INPUT_ID, button.textContent);
+            });
+        });
+    
+
+        return shortCutDivHolder;
+    } catch (error) {
+        console.error("Error loading duration shortcuts form:", error.message);
         return null;
     }
 }

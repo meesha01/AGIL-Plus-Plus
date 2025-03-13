@@ -7,7 +7,7 @@ console.debug("Content script inject-ui.js is running");
 
 // Inject the UI for Project Templates after the input fields section load
 // Injects every time the Project div is loaded
-addOnLoadObserver(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2) > div:nth-of-type(4) > div`,
+addOnLoadObserver(`${PROJECT_SECTION_SELECTOR}`,
     (projectInputsDiv) => {
     console.debug("Time Recording's Input Div found.");
     void injectFetchTemplate(projectInputsDiv);

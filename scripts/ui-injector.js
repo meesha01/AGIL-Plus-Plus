@@ -5,46 +5,39 @@
 
 console.debug("Content script inject-ui.js is running");
 
-//Inject elements to save template after the footer loads
-waitForElement(`#${TIME_RECORDING_DIV_ID} .${FOOTER_CLASS}`).then(async (footer) => {
-    console.debug("Time Recording's Footer found.");
-    await injectSaveTemplate(footer);
-})
-.catch(error => console.info('Error while finding the Time Recording footer: ', error.message));
-
-// Inject elements to fetch template after the input fields load
-// Wait for the second child of the main section (where all the form fields are)
-waitForElement(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2)`)
-    .then(async (inputContainerDiv) => {
+// Inject the UI for Project Templates after the input fields section load
+// Injects every time the Project div is loaded
+addOnLoadObserver(`#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2) > div:nth-of-type(4) > div`,
+    (projectInputsDiv) => {
     console.debug("Time Recording's Input Div found.");
-    await injectFetchTemplate(inputContainerDiv);
-})
-.catch(error => console.info('Error while finding the Time Recording container: ', error.message));
+    void injectFetchTemplate(projectInputsDiv);
+    void injectSaveTemplate(projectInputsDiv);
+});
 
 /**
- * Injects the necessary UI to save the project data to a template, in the footer
- * @param footer
+ * Injects the necessary UI to save the project data to a template
+ * @param projectSection - The section/div where all the UI will be appended
  * @returns {Promise<void>}
  */
-async function injectSaveTemplate(footer) {
+async function injectSaveTemplate(projectSection) {
     const templateDiv = await createSaveTemplateDiv();
     if (templateDiv) {
-      footer.prepend(templateDiv);
-      console.debug("Save Template div injected");
+        projectSection.append(templateDiv);
+        console.debug("Save Template div injected");
     } else {
-      console.error("Failed to create save template div.");
+        console.error("Failed to create save template div.");
     }
 }
 
 /**
  * Injects the necessary UI to select the saved template to be populated
- * @param inputContainerDiv
+ * @param projectInputsDiv - The Div that contains the inputs for Project time entry
  * @returns {Promise<void>}
  */
-async function injectFetchTemplate(inputContainerDiv) {
+async function injectFetchTemplate(projectInputsDiv) {
     const fetchTemplateDiv = await createFetchTemplateDiv();
     if(fetchTemplateDiv){
-        inputContainerDiv.insertBefore(fetchTemplateDiv, inputContainerDiv.childNodes[3]);
+        projectInputsDiv.prepend(fetchTemplateDiv);
         console.debug("Fetch Template div injected");
     } else {
         console.error("Failed to create fetch template div.");

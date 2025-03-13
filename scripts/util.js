@@ -4,6 +4,8 @@
 
 /**
  * Given a css selector, it waits for the matching element to appear in the DOM
+ * Suitable for actions that only need to performed once (eg. fetch value from element)
+ * For actions that need to be performed every time an element is added, use addOnLoadObserver
  *
  * @param selector
  * @param timeout
@@ -49,6 +51,74 @@ async function waitForElement(selector, timeout=-1) {
             subtree: true
         });
     });
+}
+
+/**
+ * Given a css selector and a callback function, it calls the callback every time an element matching the selector
+ * is added to the DOM
+ *
+ * Suitable for actions that need to be performed every single time an element is added to the DOM
+ * (Example, append a child to the element)
+ * For actions that only need to be performed once, use waitForElement
+ *
+ * @param selector
+ * @param onLoad A function that will be called once the element is added to the DOM
+ *
+ * @example
+ * // Wait for a specific element to appear
+ * addOnLoadObserver("#elementId", (element) => {
+ *   //doSomething with the element
+ * });
+ *
+ */
+function addOnLoadObserver(selector, onLoad) {
+
+    if(!onLoad){
+        log.warn("Callback function is not provided");
+        return;
+    }
+
+    // Observer to watch when the element is added:
+    const addObserver = new MutationObserver(() => {
+        if (document.querySelector(selector)) {
+            elementAdded(document.querySelector(selector));
+        }
+    });
+
+    // Observer to watch when the element is removed:
+    const removeObserver = new MutationObserver(() => {
+        if (!document.querySelector(selector)) {
+            elementRemoved();
+        }
+    });
+
+    function elementAdded(element){
+        console.debug(`Element ${element.id} with selector ${selector} was added to the page.` );
+        addObserver.disconnect();
+        //Start watching for remove:
+        removeObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        onLoad(element);
+    }
+
+    function elementRemoved(){
+        console.debug(`Element with selector ${selector} was removed from the page.` );
+        removeObserver.disconnect();
+        //Start watching again for add:
+        addObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    if(document.querySelector(selector)) {
+        elementAdded(document.querySelector(selector));
+    } else{
+        elementRemoved();
+    }
+
 }
 
 /**

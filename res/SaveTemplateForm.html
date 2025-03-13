@@ -1,18 +1,28 @@
-<div class="sapMIBar sapMTBInactive sapMTB sapMTBNewFlex sapMTBStandard sapMTB-Auto-CTX sapMOTB sapMIBar-CTX
-            sapMFooter-CTX sapContrast sapContrastPlus">
-  <label for="templateNameInput">Template Name:</label>
-  <input
-          type="text"
-          id="templateNameInput"
-          name="templateNameInput"
-          class="sapMInputBaseInner sapMInputBaseContentWrapper sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
-  />
-  <button id="saveTemplateButton"
-          class="sapMBtnBase sapMBtn sapMBarChild sapMBarChildFirstChild">
-    <span class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnIconFirst sapMBtnDefault">
-      <span class="sapMBtnContent">
-        <bdi>Save Template</bdi>
-      </span>
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+     style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto; margin-top: 10px;">
+  <span class="sapMLabel sapUiSelectable sapMLabelMaxWidth"
+        style="text-align: left;">
+    <span class="sapMLabelTextWrapper">
+      <bdi >Save As Template</bdi>
     </span>
-  </button>
+  </span>
+</div>
+
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+     style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;">
+  <div class="sapMInputBase sapMInputBaseHeightMargin sapMInput sapUiSmallMarginBottom" style="width: 100%;">
+    <div class="sapMInputBaseContentWrapper" style="width:auto;">
+      <!--suppress HtmlFormInputWithoutLabel - Label is added separately -->
+      <input id="templateNameInput" placeholder="Template Name" maxlength="50" type="text" class="sapMInputBaseInner"
+              style="width: 400px;"/>
+    </div>
+    <button id="saveTemplateButton" class="sapMBtnBase sapMBtn"
+            style="margin-left: 10px;">
+        <span class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnIconFirst sapMBtnDefault">
+          <span class="sapMBtnContent">
+            <bdi>Save Template</bdi>
+          </span>
+        </span>
+    </button>
+  </div>
 </div>

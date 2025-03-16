@@ -13,13 +13,10 @@ function saveData(key, value){
 }
 
 async function getAllKeys() {
-    const keys = [];
-    for(let i=0; i<localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if(key.startsWith(LOCAL_STORAGE_PREFIX))
-            keys.push(key.substring(LOCAL_STORAGE_PREFIX.length));
-    }
-    return keys;
+    return Object.keys(localStorage)
+        .filter(key => key.startsWith(LOCAL_STORAGE_PREFIX))
+        .map(key => key.substring(LOCAL_STORAGE_PREFIX.length))
+        .sort();
 }
 
 function getValue(key){

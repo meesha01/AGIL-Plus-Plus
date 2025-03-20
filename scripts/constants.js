@@ -10,6 +10,7 @@ const TIME_RECORDING_MAIN_SECTION_ID =
 const PROJECT_SECTION_SELECTOR =
     `#${TIME_RECORDING_MAIN_SECTION_ID} > div:nth-of-type(2) > div:nth-of-type(4) > div`;
 
+
 // Input field IDs
 const DURATION_INPUT_ID = "__input0-inner";
 const TICKET_NUMBER_INPUT_ID = "__input1-inner";

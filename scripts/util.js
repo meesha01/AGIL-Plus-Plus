@@ -187,3 +187,32 @@ function addOption(element, optionValue) {
     option.innerHTML = optionValue;
     element.appendChild(option);
 }
+
+/**
+ * Extracts the project ID from the list item returned by project search
+ * This function, will only work if the structure within the <li> does not change
+ * @param listItem - One project search result <li> element
+ * @returns id - the project ID
+ */
+function getIdFromListItem(listItem){
+    const projectDetailsSpan =
+        listItem.querySelector(".sapMObjLBottomRow > div:first-child > div > div > span");
+    if(!projectDetailsSpan){
+        log.warning("Could not find the project ID for "+ listItem.id);
+        return null;
+    }
+
+    const projectDetailsValue = projectDetailsSpan.innerHTML;
+
+    // Find the position of the last set of brackets:
+    const start = projectDetailsValue.lastIndexOf("(")+1;
+    const end = projectDetailsValue.lastIndexOf(")");
+
+    if(!start || !end || start>=end){
+        log.warning("Could not find the project ID for "+ listItem.id);
+        return null;
+    }
+
+    //Extract the text within the last set of brackets:
+    return projectDetailsValue.substring(start, end);
+}

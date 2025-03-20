@@ -101,7 +101,14 @@ async function setProject(projectId){
         const searchResultListItem = await waitForElement(
             `#${PROJECT_SEARCH_RESULT_LIST_ID} > li:not(#${PROJECT_SEARCH_NO_DATA_LI_ID})`
         );
-        simulateClick(searchResultListItem);
+        const projectList = searchResultListItem.parentElement;
+
+        for(const listItem of projectList.children) {
+            const itemId = getIdFromListItem(listItem);
+            if(projectId===itemId){
+                simulateClick(listItem);
+            }
+        }
     } catch(error) {
         console.error("Could not Set the Project ID.", error.message);
     }

@@ -55,7 +55,7 @@ async function injectFetchTemplate(projectInputsDiv) {
 
 /**
  * Injects some buttons to ease the duration input
- * @param inputContainerDiv
+ * @param durationInputRow
  * @returns {Promise<void>}
  */
 async function injectDurationShortcutsTemplate(durationInputRow) {

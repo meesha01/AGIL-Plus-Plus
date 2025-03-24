@@ -33,6 +33,7 @@ async function injectSaveTemplate(projectSection) {
         console.debug("Save Template div injected");
     } else {
         console.error("Failed to create save template div.");
+        showToast(PAGE_REFRESH_REQUEST);
     }
 }
 
@@ -48,12 +49,13 @@ async function injectFetchTemplate(projectInputsDiv) {
         console.debug("Fetch Template div injected");
     } else {
         console.error("Failed to create fetch template div.");
+        showToast(PAGE_REFRESH_REQUEST);
     }
 }
 
 /**
  * Injects some buttons to ease the duration input
- * @param inputContainerDiv
+ * @param durationInputRow
  * @returns {Promise<void>}
  */
 async function injectDurationShortcutsTemplate(durationInputRow) {
@@ -63,6 +65,7 @@ async function injectDurationShortcutsTemplate(durationInputRow) {
         console.debug("DurationShortcuts Template div injected");
     } else {
         console.error("Failed to create DurationShortcuts div.");
+        showToast(PAGE_REFRESH_REQUEST);
     }
 }
 

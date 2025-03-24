@@ -24,8 +24,10 @@ async function saveTemplate(templateName){
     }
     else{
         console.error("Template selector not found while trying to add new option-"+ templateName);
+        showToast(PAGE_REFRESH_REQUEST);
     }
-    //TODO: Display some kind of message saying "Saved"
+
+    showToast(`Template "${templateName}" saved successfully`, "green");
 }
 
 /**
@@ -74,6 +76,7 @@ async function getProjectId(){
     }
     catch(error){
         console.error("Could not fetch value of Project ID.", error.message);
+        showToast("Could not save the project. Try again", "red");
         return null;
     }
 }
@@ -101,8 +104,22 @@ async function setProject(projectId){
         const searchResultListItem = await waitForElement(
             `#${PROJECT_SEARCH_RESULT_LIST_ID} > li:not(#${PROJECT_SEARCH_NO_DATA_LI_ID})`
         );
-        simulateClick(searchResultListItem);
+        const projectList = searchResultListItem.parentElement;
+
+        let found = false
+        for (const listItem of projectList.children) {
+            const itemId = getIdFromListItem(listItem);
+            if (projectId === itemId) {
+                simulateClick(listItem);
+                found=true;
+                break;
+            }
+        }
+        if(!found){
+            showToast("Could not find the saved project in your Project list");
+        }
     } catch(error) {
         console.error("Could not Set the Project ID.", error.message);
+        showToast("Could not Set the Project.", "red");
     }
 }

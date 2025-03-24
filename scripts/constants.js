@@ -37,3 +37,6 @@ const KEY_DOWN_ENTER = new KeyboardEvent("keydown", {
     bubbles: true,
     cancelable: true,
 });
+
+//String constants:
+const PAGE_REFRESH_REQUEST = "Page refresh recommended";

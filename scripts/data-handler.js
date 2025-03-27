@@ -15,8 +15,7 @@ function saveData(key, value){
 async function getAllKeys() {
     return Object.keys(localStorage)
         .filter(key => key.startsWith(LOCAL_STORAGE_PREFIX))
-        .map(key => key.substring(LOCAL_STORAGE_PREFIX.length))
-        .sort();
+        .map(key => key.substring(LOCAL_STORAGE_PREFIX.length));
 }
 
 function getValue(key){

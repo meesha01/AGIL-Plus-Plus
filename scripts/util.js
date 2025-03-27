@@ -178,14 +178,34 @@ function getInputValue(elementId){
  * Target option -> <option className="sapUiBodyBackground" value="value">Value</option>
  *
  * @param element
- * @param optionValue
+ * @param newValue
  */
-function addOption(element, optionValue) {
-    const option = document.createElement("option");
-    option.classList.add("sapUiBodyBackground");
-    option.value = optionValue;
-    option.innerHTML = optionValue;
-    element.appendChild(option);
+function addOption(element, newValue) {
+
+    const newOption = document.createElement("option");
+    newOption.classList.add("sapUiBodyBackground");
+    newOption.value = newValue;
+    newOption.innerHTML = newValue;
+
+    let processed = false;
+    // Iterate through the existing options
+    for(const option of element.children){
+        if(newValue === option.value){
+            console.debug(`Option with ${newValue} already exists`);
+            processed = true;
+            break;
+        }
+        if(newValue.toLocaleLowerCase() < option.value.toLocaleLowerCase()){
+            //Insert
+            element.insertBefore(newOption, option);
+            processed = true;
+            break;
+        }
+    }
+
+    if(!processed){
+        element.append(newOption);
+    }
 }
 
 /**

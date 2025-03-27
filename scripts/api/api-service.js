@@ -14,14 +14,22 @@
  *     "HRRelevant": true|false,
  *     "HREmployeeID": "ID",
  *     "EmployeeID": "ID",
- *     "WorkAgreement": "Some Number"
+ *     "WorkAgreement": "Some-Number"
  * }
- * @returns {Promise<void>}
+ * @returns {Promise<Object>}
  */
 async function getActiveUser(){
+
+    const BASE_URL = getBaseURL();
+    if(!BASE_URL){
+        console.error("Cannot find base URL");
+        showToast("Error while fetching details of the active user. "+PAGE_REFRESH_REQUEST, "red");
+        return null;
+    }
+
     try {
         const response = await fetch(
-            BASE_URL+"/time/GetActiveUser(EmployeeID='')", {
+            BASE_URL+"/GetActiveUser(EmployeeID='')", {
                 method: "GET",
                 headers: COMMON_REQUEST_HEADERS,
                 COMMON_PARAMS: COMMON_REQUEST_PARAMS
@@ -44,5 +52,6 @@ async function getActiveUser(){
         return activeUserData;
     } catch (error) {
         console.error("Error occurred while trying to call GetActiveUser", error);
+        showToast("Error while fetching details of the active user. "+PAGE_REFRESH_REQUEST, "red");
     }
 }

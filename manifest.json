@@ -22,7 +22,7 @@
         {
           "js": [
             "scripts/constants.js", "scripts/util.js",
-            "scripts/api/api-constants.js", "scripts/api/api-service.js",
+            "scripts/api/api-constants.js", "scripts/api/api-util.js", "scripts/api/api-service.js",
             "scripts/ProjectEntry.js", "scripts/data-handler.js", "scripts/field-manipulator.js",
             "scripts/ui-injector.js"
           ],

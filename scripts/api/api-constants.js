@@ -2,8 +2,10 @@
  * Constants for making / processing API requests
  */
 
-const BASE_URL =
-    "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/36b3ed5a-f7c5-4639-8016-937430143bf3.AGILTimeManagerservice.timerecording/~c7a802a6-ef2f-4be5-b77e-3b61d0aeb2d3~/odata/v4"
+const BASE_URL_PATTERN =
+    /https:\/\/actesprd\.launchpad\.cfapps\.eu10\.hana\.ondemand\.com\/.*\.AGILTimeManagerservice\.timerecording\/.*\/odata\/v4\/time\/\$batch/gm;
+
+const BASE_URL_ENDPOINT = /\/\$batch/gm;
 
 const COMMON_REQUEST_HEADERS = {
     accept: "application/json;odata.metadata=minimal",

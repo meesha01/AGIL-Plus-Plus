@@ -1,7 +1,0 @@
-Typescript?
-unit tests
-Check if AGIL link is same for everyone
-Fix/add asynchronous code
-Replace icon
-Delete templates
-reset the selector when the project page is opened

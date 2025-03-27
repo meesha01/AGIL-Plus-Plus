@@ -21,8 +21,10 @@
     "content_scripts": [
         {
           "js": [
-            "scripts/constants.js", "scripts/util.js",  "scripts/ProjectEntry.js", "scripts/data-handler.js",
-            "scripts/field-manipulator.js" ,"scripts/ui-injector.js"
+            "scripts/constants.js", "scripts/util.js",
+            "scripts/api/api-constants.js", "scripts/api/api-service.js",
+            "scripts/ProjectEntry.js", "scripts/data-handler.js", "scripts/field-manipulator.js",
+            "scripts/ui-injector.js"
           ],
           "matches": [
             "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"

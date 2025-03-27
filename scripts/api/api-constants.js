@@ -1,4 +1,4 @@
-/**
+/**MobileWorking
  * Constants for making / processing API requests
  */
 
@@ -16,3 +16,9 @@ const COMMON_REQUEST_PARAMS = {
     credentials: "include",
     mode: "cors"
 };
+
+const WORKPLACE = {
+    MOBILE: "MobileWorking",
+    OFFICE: "Office",
+    CUSTOMER: "CustomerVisit"
+}

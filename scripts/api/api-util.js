@@ -31,5 +31,5 @@ function getBaseURL() {
     }
 
     console.error("Could not find any resource with matching Base URL");
-    return null;
+    throw new Error("Could not find any resource with matching Base URL");
 }

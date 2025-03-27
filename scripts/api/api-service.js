@@ -2,6 +2,8 @@
  * All the API call functions that interact with the SAP backend
  */
 
+let employee = null;
+
 /**
  * Returns data about the currently active user
  * Expected response:
@@ -16,42 +18,83 @@
  *     "EmployeeID": "ID",
  *     "WorkAgreement": "Some-Number"
  * }
- * @returns {Promise<Object>}
+ * @returns {Promise<Employee|null>}
+ * @param forceReload - Ignores stored employee data when true. Default false.
  */
-async function getActiveUser(){
+async function getEmployeeData(forceReload=false){
 
-    const BASE_URL = getBaseURL();
-    if(!BASE_URL){
-        console.error("Cannot find base URL");
-        showToast("Error while fetching details of the active user. "+PAGE_REFRESH_REQUEST, "red");
-        return null;
+    if(employee && !forceReload){
+        return employee;
     }
 
-    try {
-        const response = await fetch(
-            BASE_URL+"/GetActiveUser(EmployeeID='')", {
-                method: "GET",
-                headers: COMMON_REQUEST_HEADERS,
-                COMMON_PARAMS: COMMON_REQUEST_PARAMS
-            },
+    const BASE_URL = getBaseURL();
+
+    const response = await fetch(
+        BASE_URL+"/GetActiveUser(EmployeeID='')", {
+            method: "GET",
+            headers: COMMON_REQUEST_HEADERS,
+            COMMON_REQUEST_PARAMS
+        },
+    );
+
+    if(!response.ok){
+        console.error(
+            "GetActiveUser returned non-success code: ", response.status,
+            "Message: ", response.statusText
         );
+        throw new Error("GetActiveUser returned non-success code");
+    }
+
+    const activeUserData = await response.json();
+    if(!activeUserData){
+        throw new Error("activeUserData is null");
+    }
+
+    employee = Employee.createFromActiveUser(activeUserData);
+    return employee;
+}
+
+/**
+ *
+ * @param recordDate - The date for which this time will be saved. Format- "yyyy-mm-dd" , Eg - "2025-03-26"
+ * @param startTime - Format - "hh:mm:ss", Eg - "08:00:00"
+ * @param endTime - Format - "hh:mm:ss", Eg - "08:00:00"
+ * @param workplace - MobileWorking, Office, CustomerVisit . Use the WORKPLACE constant
+ * @returns {Promise<null>}
+ */
+async function savePresenceTime(recordDate, startTime, endTime, workplace=WORKPLACE.MOBILE){
+
+    try {
+        const BASE_URL = getBaseURL();
+
+        const employee = await getEmployeeData();
+
+        const body = {
+            "EmployeeID": employee.employeeId,
+            "RecordDate": recordDate,
+            "Category":"Presence",
+            "Workplace":workplace,
+            "Offset": (new Date()).getTimezoneOffset(),
+            "StartTime": startTime,
+            "EndTime": endTime
+        };
+
+        const response = await fetch(BASE_URL + "/PresenceTimeRecords", {
+            "headers": {
+                ...COMMON_REQUEST_HEADERS,
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            COMMON_REQUEST_PARAMS,
+            "method": "POST",
+            "body": JSON.stringify(body),
+        });
 
         if(!response.ok){
-            console.error(
-                "GetActiveUser returned non-success code: ", response.status,
-                "Message: ", response.statusText
-            );
-            return null;
+            throw new Error("POST PresenceTimeRecords returned non-success code");
         }
-
-        const activeUserData = await response.json();
-        if(!activeUserData)
-            return null;
-
-        console.debug("Employee ID: " + activeUserData.EmployeeID)
-        return activeUserData;
     } catch (error) {
-        console.error("Error occurred while trying to call GetActiveUser", error);
-        showToast("Error while fetching details of the active user. "+PAGE_REFRESH_REQUEST, "red");
+        console.error("Error while saving presence time.", error);
+        showToast(`Error while saving presence time for ${recordDate}. ` + PAGE_REFRESH_REQUEST, "red");
+        return null;
     }
 }

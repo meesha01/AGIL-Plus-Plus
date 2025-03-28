@@ -2,6 +2,7 @@
 A Chrome extension that adds features to SAP's AGILTime Tool
 
 [![GitHub Release](https://img.shields.io/github/v/release/meesha01/AGIL-Plus-Plus)](https://github.com/meesha01/AGIL-Plus-Plus/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/meesha01/AGIL-Plus-Plus?include_prereleases&label=beta)](https://github.com/meesha01/AGIL-Plus-Plus/releases)
 [![GitHub contributors](https://img.shields.io/github/contributors/meesha01/AGIL-Plus-Plus)](https://github.com/meesha01/AGIL-Plus-Plus/graphs/contributors)
 
 ## Feature List:

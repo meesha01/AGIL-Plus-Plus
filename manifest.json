@@ -14,15 +14,20 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["res/SaveTemplateForm.html", "res/FetchTemplateForm.html", "res/DurationShortcuts.html"],
+        "resources": [
+          "res/SaveTemplateForm.html", "res/FetchTemplateForm.html", "res/DurationShortcuts.html",
+          "res/PresenceTimeCustomizations.html"
+        ],
         "matches": ["https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"]
       }
     ],
     "content_scripts": [
         {
           "js": [
-            "scripts/constants.js", "scripts/util.js",  "scripts/ProjectEntry.js", "scripts/data-handler.js",
-            "scripts/field-manipulator.js" ,"scripts/ui-injector.js"
+            "scripts/constants.js", "scripts/util.js",
+            "scripts/models/ProjectEntry.js", "scripts/models/Employee.js",
+            "scripts/api/api-constants.js", "scripts/api/api-util.js", "scripts/api/api-service.js",
+            "scripts/data-handler.js", "scripts/field-manipulator.js", "scripts/ui-injector.js"
           ],
           "matches": [
             "https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"

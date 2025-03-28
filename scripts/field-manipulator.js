@@ -123,3 +123,45 @@ async function setProject(projectId){
         showToast("Could not Set the Project.", "red");
     }
 }
+
+async function saveAllPresenceTime(){
+    const presenceTimeErrorsLabel = document.getElementById(PRESENCE_TIME_ERROR_LABEL_ID);
+
+    presenceTimeErrorsLabel.hidden = true;
+    presenceTimeErrorsLabel.innerHTML = "";
+
+    //Get values:
+    const currentDate = new Date(getInputValue(PRESENCE_DATE_INPUT_ID));
+    const startTime = getInputValue(PRESENCE_START_TIME_INPUT_ID);
+    const endTime = getInputValue(PRESENCE_END_TIME_INPUT_ID);
+
+    //Get all weekdays:
+    const weekdays = getAllWeekdays(currentDate);
+
+    const failedDates = [];
+    const savePromises = [];
+
+    for(const weekday of weekdays){
+        const promise = savePresenceTime(weekday, startTime, endTime).then(r => {
+            console.debug("Presence time saved for "+weekday);
+        }).catch(error => {
+            console.warn(`Could not save presence time for ${weekday}`,error);
+            failedDates.push(weekday);
+        });
+        savePromises.push(promise);
+    }
+
+    await Promise.allSettled(savePromises);
+
+    if(failedDates.length > 0){
+        const message = "Saving presence time failed for - "+failedDates.map(date => {
+            return date.toLocaleDateString();
+        }).join(", ");
+
+        showToast("Saving presence time failed for some dates", "red");
+        presenceTimeErrorsLabel.innerHTML = message;
+        presenceTimeErrorsLabel.hidden = false;
+    } else{
+        showToast("Saved presence time for all dates", "green");
+    }
+}

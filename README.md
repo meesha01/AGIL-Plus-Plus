@@ -6,7 +6,7 @@ A Chrome extension that adds features to SAP's AGILTime Tool
 
 ## Feature List:
 - Save repeated Project data as a template to reuse it.
-- More incoming 😅
+- Save presence time for the entire week in one click (experimental)
 - Click the Watch button above to get notified when new features/bug fixes are added
 
 ## Installation

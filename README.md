@@ -1,13 +1,17 @@
 # AGILTime++
 A Chrome extension that adds features to SAP's AGILTime Tool
 
+[![GitHub Release](https://img.shields.io/github/v/release/meesha01/AGIL-Plus-Plus)](https://github.com/meesha01/AGIL-Plus-Plus/releases/latest)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/meesha01/AGIL-Plus-Plus/total)]()
+[![GitHub contributors](https://img.shields.io/github/contributors/meesha01/AGIL-Plus-Plus)](https://github.com/meesha01/AGIL-Plus-Plus/graphs/contributors)
+
 ## Feature List:
 - Save repeated Project data as a template to reuse it.
 - More incoming 😅
 - Click the Watch button above to get notified when new features/bug fixes are added
 
 ## Installation
-1. Download or clone this repository into a folder
+1. Download or clone the source code zip of the [latest release](https://github.com/meesha01/AGIL-Plus-Plus/releases/latest) and extract it into a folder
 2. Refer to Chrome's guide to [load an unpacked extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) (2m ⌚)
 
 ## Usage

@@ -18,7 +18,16 @@ const COMMON_REQUEST_PARAMS = {
 };
 
 const WORKPLACE = {
-    MOBILE: "MobileWorking",
-    OFFICE: "Office",
-    CUSTOMER: "CustomerVisit"
+    MOBILE: {
+        label:"Mobile working",
+        value:"MobileWorking"
+    },
+    OFFICE: {
+        label: "In office",
+        value: "Office"
+    },
+    CUSTOMER: {
+        label: "Customer visit",
+        value: "CustomerVisit"
+    }
 }

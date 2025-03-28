@@ -21,6 +21,13 @@ addOnLoadObserver(`${PROJECT_SECTION_SELECTOR} > div:nth-of-type(8)`,
     void injectDurationShortcutsTemplate(durationDataRow);
 });
 
+// Inject UI for Presence time the end of the section
+addOnLoadObserver(PRESENCE_SECTION_SELECTOR,
+    (presenceDiv) => {
+    console.debug("Presence Time section found.");
+    void injectPresenceTimeCustomizations(presenceDiv);
+});
+
 /**
  * Injects the necessary UI to save the project data to a template
  * @param projectSection - The section/div where all the UI will be appended
@@ -65,6 +72,22 @@ async function injectDurationShortcutsTemplate(durationInputRow) {
         console.debug("DurationShortcuts Template div injected");
     } else {
         console.error("Failed to create DurationShortcuts div.");
+        showToast(PAGE_REFRESH_REQUEST);
+    }
+}
+
+/**
+ * Injects custom elements to Presence Time section
+ * @param presenceTimeDiv
+ * @returns {Promise<void>}
+ */
+async function injectPresenceTimeCustomizations(presenceTimeDiv) {
+    const presenceTimeCustomizations = await createPresenceCustomizations();
+    if(presenceTimeCustomizations){
+        presenceTimeDiv.appendChild(presenceTimeCustomizations);
+        console.debug("Presence Time customizations injected");
+    } else {
+        console.error("Failed to create Presence Time customizations.");
         showToast(PAGE_REFRESH_REQUEST);
     }
 }
@@ -146,6 +169,26 @@ async function createDurationShortcutsDiv(){
         return shortCutDivHolder;
     } catch (error) {
         console.error("Error loading duration shortcuts form:", error.message);
+        return null;
+    }
+}
+
+async function createPresenceCustomizations(){
+    try{
+        const response = await fetch(chrome.runtime.getURL("res/PresenceTimeCustomizations.html"));
+        const presenceCustomizationsHTML = await response.text();
+
+        const presenceCustomizationsHolder = document.createElement("div");
+        presenceCustomizationsHolder.innerHTML = presenceCustomizationsHTML;
+
+        const saveWeekTimeButton = presenceCustomizationsHolder.querySelector("#"+SAVE_WEEK_TIME_BUTTON);
+        saveWeekTimeButton.addEventListener("click", () => {
+            saveAllPresenceTime();
+        });
+
+        return presenceCustomizationsHolder;
+    } catch (error) {
+        console.error("Error loading presence time customizations", error.message);
         return null;
     }
 }

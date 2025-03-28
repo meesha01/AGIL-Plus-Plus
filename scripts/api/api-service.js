@@ -56,13 +56,13 @@ async function getEmployeeData(forceReload=false){
 
 /**
  *
- * @param recordDate - The date for which this time will be saved. Format- "yyyy-mm-dd" , Eg - "2025-03-26"
- * @param startTime - Format - "hh:mm:ss", Eg - "08:00:00"
- * @param endTime - Format - "hh:mm:ss", Eg - "08:00:00"
+ * @param {Date} recordDate - The date for which this time will be saved. Format- "yyyy-mm-dd" , Eg - "2025-03-26"
+ * @param {String} startTime - Format - "hh:mm:ss", Eg - "08:00:00"
+ * @param {String} endTime - Format - "hh:mm:ss", Eg - "08:00:00"
  * @param workplace - MobileWorking, Office, CustomerVisit . Use the WORKPLACE constant
  * @returns {Promise<null>}
  */
-async function savePresenceTime(recordDate, startTime, endTime, workplace=WORKPLACE.MOBILE){
+async function savePresenceTime(recordDate, startTime, endTime, workplace=WORKPLACE.MOBILE.value){
 
     try {
         const BASE_URL = getBaseURL();
@@ -71,7 +71,7 @@ async function savePresenceTime(recordDate, startTime, endTime, workplace=WORKPL
 
         const body = {
             "EmployeeID": employee.employeeId,
-            "RecordDate": recordDate,
+            "RecordDate": formatDateYYYYMMDD(recordDate),
             "Category":"Presence",
             "Workplace":workplace,
             "Offset": (new Date()).getTimezoneOffset(),
@@ -94,7 +94,6 @@ async function savePresenceTime(recordDate, startTime, endTime, workplace=WORKPL
         }
     } catch (error) {
         console.error("Error while saving presence time.", error);
-        showToast(`Error while saving presence time for ${recordDate}. ` + PAGE_REFRESH_REQUEST, "red");
-        return null;
+        throw error;
     }
 }

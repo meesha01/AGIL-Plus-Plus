@@ -1,0 +1,38 @@
+<!-- The UI elements to customize Presence Time -->
+
+<!-- A label and button to save presence time for the whole week -->
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+     style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto; margin-top: 10px;">
+  <span class="sapMLabel sapUiSelectable sapMLabelMaxWidth"
+        style="text-align: left;">
+    <span class="sapMLabelTextWrapper">
+      <bdi>Save the same time for all weekdays of this week</bdi>
+    </span>
+  </span>
+</div>
+
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+     style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;">
+    <div class="sapMInputBase sapMInputBaseHeightMargin sapMInput sapUiSmallMarginBottom" style="width: 100%;">
+        <button id="saveWeekTimeButton" class="sapMBtnBase sapMBtn"
+                style="margin-left: 10px;">
+        <span class="sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnText sapMBtnIconFirst sapMBtnDefault">
+          <span class="sapMBtnContent">
+            <bdi>Save All</bdi>
+          </span>
+        </span>
+        </button>
+    </div>
+</div>
+
+<!-- Label to display errors -->
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem"
+     style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto; margin-top: 10px;">
+  <span class="sapMLabel sapUiSelectable sapMLabelMaxWidth"
+        style="text-align: left;">
+    <span class="sapMLabelTextWrapper">
+      <bdi id="PresenceTimeErrorsLabel" style="color: rgb(250, 97, 97)" hidden>
+      </bdi>
+    </span>
+  </span>
+</div>

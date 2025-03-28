@@ -14,7 +14,10 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["res/SaveTemplateForm.html", "res/FetchTemplateForm.html", "res/DurationShortcuts.html"],
+        "resources": [
+          "res/SaveTemplateForm.html", "res/FetchTemplateForm.html", "res/DurationShortcuts.html",
+          "res/PresenceTimeCustomizations.html"
+        ],
         "matches": ["https://actesprd.launchpad.cfapps.eu10.hana.ondemand.com/*"]
       }
     ],
